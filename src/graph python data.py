@@ -3,7 +3,9 @@ import matplotlib.dates as mdates
 import datetime
 import datetime as dt
 
-#this is a test
+
+
+# this funtion takes a csv file and cleans it into a dataframe
 def get_df():
     fname = "C:\\Users\\bbiel\\Documents\\Mu Code ISTA\\Final\\data_table_for_daily_death_trends__california zejun graph.csv"
     df = pd.read_csv(fname,sep=',', skiprows = 2, engine='python')
@@ -15,7 +17,7 @@ def get_df():
     del df["Date"]
     return df
 
-
+# This gets and returns a list of the dates
 def get_date_lst():
     df = get_df()
     lst_dates = []
@@ -24,6 +26,7 @@ def get_date_lst():
     return lst_dates
 
 
+# this creates the first graph
 def fig1():
     df = get_df()
     lst_dates = get_date_lst()
@@ -34,8 +37,9 @@ def fig1():
     plt.gcf().autofmt_xdate()
     plt.xlabel("Dates")
     plt.ylabel("Current Hospitalized COVID-19 Patients in California")
+    
 
-
+#this creates the second graph
 def fig2():
     df = get_df()
     lst_dates = get_date_lst()
@@ -50,16 +54,17 @@ def fig2():
         lst.append(i)
     x_pos = [i for i, _ in enumerate(x)]
     plt.bar(x,lst,width=0.8, color='black')
-
-
+    
+    
     fig=df.plot.bar(capsize=8, legend=None,
     rot=0,fontsize=10,color=['blue','green'],edgecolor='black',
     linewidth=3, figsize=(12,8))
-
+    
     plt.xlabel("Dates")
     plt.ylabel("New COVID-19 Deaths in California")
+    
 
-
+#this creates the third graph
 def fig3():
     df = get_df()
     plt.figure(figsize=(16,10), dpi= 80)
@@ -75,16 +80,20 @@ def fig3():
     plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=50))
     plt.xlabel("Dates")
     plt.ylabel("7-Day Moving Avg in California")
-
+    
+# this is the first main, I have two because I had issues managing the plt object.
+# The other graphs will be displayed when the first graphs are closed.
 def main():
     fig1()
     fig2()
     fig3()
     plt.show()
+    
+    
+main()    
 
-
-main()
-
+# this converts 2 different CSVs with one of the csv file paths being provided as a paramenter. The CSVs are converted
+# to dataframes.
 def csv(file):
     df = pd.read_csv(file, sep = ",", skiprows = 2)
     df2 = pd.read_csv("C:\\Users\\bbiel\\Documents\\Mu Code ISTA\\Final\\data_table_for_daily_death_trends__california.csv", sep = "," , skiprows = 2)
@@ -96,7 +105,7 @@ def csv(file):
         a = pd.to_numeric(df["Total Doses Administered"])
         df.loc[i-1,"Doses Per Day"] = abs((int(a.iloc[i-1]) - int(a.iloc[i])))
         a.append(df["Doses Per Day"])
-    #for j in
+    #for j in 
     df.drop(labels = [0], axis = 0)
     df.drop([0, 1, 2], axis = 0,inplace = True)
    #for j in range
@@ -105,6 +114,8 @@ def csv(file):
     del df["State"]
     return df
 
+
+# this function cleans a csv to make it more workable for the project.
 def clean_dose():
     df = csv("C:\\Users\\bbiel\\Documents\\Mu Code ISTA\\Final\\data_table_for_daily_cases_trends__california.csv")
     lst_dates = []
@@ -114,6 +125,7 @@ def clean_dose():
     return df
 
 
+# This creates the fourth graph
 def figure1():
     df = csv("C:\\Users\\bbiel\\Documents\\Mu Code ISTA\\Final\\data_table_for_daily_cases_trends__california.csv")
     x = [dt.datetime.strptime(d,'%m %d %Y').date() for d in df["Dates"]]
@@ -125,6 +137,8 @@ def figure1():
     plt.ylabel("New Cases")
 
 
+
+# this creates the fifth graph
 def figure2():
     df = csv("C:\\Users\\bbiel\\Documents\\Mu Code ISTA\\Final\\data_table_for_daily_cases_trends__california.csv")
     plt.figure(figsize=(10,10))
@@ -142,6 +156,7 @@ def figure2():
     plt.ylabel("New Deaths")
 
 
+# this creates the sixth graph
 def figure3():
     df = clean_dose()
     plt.figure(figsize=(16,10), dpi= 80)
@@ -159,12 +174,14 @@ def figure3():
     plt.gca().invert_xaxis()
 
 
+# this is the first main, I have two because I had issues managing the plt object.
+# The other graphs will be displayed when the first graphs are closed.
 def main2():
     clean_dose()
     figure1()
     figure2()
     figure3()
     plt.show()
-
+    
 
 main2()
