@@ -1,0 +1,14 @@
+https://covid.cdc.gov/covid-data-tracker/#trends_dailydeaths
+
+Columns: State, Date, New Deaths, 7-Day Moving Avg, Current Hospitalized COVID-19 Patients
+
+We chose this data, because is abundant and easily accessible, furthermore this data affects our daily lives.
+Each of the team members will choose a different state and will gather data for their respective states and will compare the quality of the data.
+We will be retireving our data from the CDC website. 
+
+Group Members:
+Alexander Esparza
+Zejun Li
+Bryan Bielawa
+Luis Flores Lozano
+Ngan Pham
