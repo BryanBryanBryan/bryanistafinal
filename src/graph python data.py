@@ -173,7 +173,16 @@ def figure3():
     plt.bar(x,lst,width=0.8, color='navy')
     plt.xlabel("Dates")
     plt.ylabel("Doses Per Day")
+    x2=[]
+    y2=[]
+    for i in range(349):
+        x2.append(int(i))
+    for b in x2:
+        y2.append(-716*b+251000)
+    plt.plot(x2, y2)
     plt.gca().invert_xaxis()
+
+
 
 
 # this is the first main, I have two because I had issues managing the plt object.
