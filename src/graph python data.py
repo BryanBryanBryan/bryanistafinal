@@ -37,7 +37,7 @@ def fig1():
     plt.gcf().autofmt_xdate()
     plt.xlabel("Dates")
     plt.ylabel("Current Hospitalized COVID-19 Patients in California")
-    
+
 
 #this creates the second graph
 def fig2():
@@ -54,15 +54,17 @@ def fig2():
         lst.append(i)
     x_pos = [i for i, _ in enumerate(x)]
     plt.bar(x,lst,width=0.8, color='black')
-    
-    
+
+
     fig=df.plot.bar(capsize=8, legend=None,
     rot=0,fontsize=10,color=['blue','green'],edgecolor='black',
     linewidth=3, figsize=(12,8))
-    
+
     plt.xlabel("Dates")
-    plt.ylabel("New COVID-19 Deaths in California")
-    
+    plt.ylabel("New COVID-19 Hospitalizations in California")
+    fig.invert_xaxis()
+    #plt.ylabel("New COVID-19 Deaths in California")
+
 
 #this creates the third graph
 def fig3():
@@ -80,7 +82,7 @@ def fig3():
     plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=50))
     plt.xlabel("Dates")
     plt.ylabel("7-Day Moving Avg in California")
-    
+
 # this is the first main, I have two because I had issues managing the plt object.
 # The other graphs will be displayed when the first graphs are closed.
 def main():
@@ -88,9 +90,9 @@ def main():
     fig2()
     fig3()
     plt.show()
-    
-    
-main()    
+
+
+main()
 
 # this converts 2 different CSVs with one of the csv file paths being provided as a paramenter. The CSVs are converted
 # to dataframes.
@@ -105,7 +107,7 @@ def csv(file):
         a = pd.to_numeric(df["Total Doses Administered"])
         df.loc[i-1,"Doses Per Day"] = abs((int(a.iloc[i-1]) - int(a.iloc[i])))
         a.append(df["Doses Per Day"])
-    #for j in 
+    #for j in
     df.drop(labels = [0], axis = 0)
     df.drop([0, 1, 2], axis = 0,inplace = True)
    #for j in range
@@ -182,6 +184,6 @@ def main2():
     figure2()
     figure3()
     plt.show()
-    
+
 
 main2()
